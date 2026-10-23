@@ -1,0 +1,12 @@
+def f(x):
+    return -(x-a)**2 + b
+
+a = int(input("Enter peak position (a): "))
+b = int(input("Enter maximum value (b): "))
+x = int(input("Enter starting value of x: "))
+
+while f(x + 1) > f(x):
+    x += 1
+
+print("Best x =", x)
+print("Maximum value =", f(x))
