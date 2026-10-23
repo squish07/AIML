@@ -1,0 +1,32 @@
+graph = {}
+h = {}
+
+n = int(input("Enter number of nodes: "))
+
+for i in range(n):
+    node = input("Node: ")
+    h[node] = int(input(f"Heuristic of {node}: "))
+    m = int(input(f"Number of neighbors of {node}: "))
+    graph[node] = {}
+
+    for j in range(m):
+        neighbor = input("Neighbor: ")
+        cost = int(input("Cost: "))
+        graph[node][neighbor] = cost
+
+current = input("Start node: ")
+goal = input("Goal node: ")
+
+print("Path:", current, end=" ")
+
+cost = 0
+while current != goal:
+    next_node = min(
+        graph[current],
+        key=lambda x: graph[current][x] + h[x]
+    )
+    cost += graph[current][next_node]
+    current = next_node
+    print(current, end=" ")
+
+print("\nTotal Cost:", cost)
