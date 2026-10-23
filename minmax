@@ -1,0 +1,31 @@
+def minimax(depth, node_index, is_max, values, max_depth):
+    # Base condition
+    if depth == max_depth:
+        return values[node_index]
+
+    if is_max:
+        return max(
+            minimax(depth + 1, node_index * 2, False, values, max_depth),
+            minimax(depth + 1, node_index * 2 + 1, False, values, max_depth)
+        )
+    else:
+        return min(
+            minimax(depth + 1, node_index * 2, True, values, max_depth),
+            minimax(depth + 1, node_index * 2 + 1, True, values, max_depth)
+        )
+
+# User input
+depth = int(input("Enter depth of game tree: "))
+
+n = 2 ** depth
+
+print("Enter", n, "leaf node values:")
+values = []
+
+for i in range(n):
+    values.append(int(input(f"Value {i + 1}: ")))
+
+# Calculate optimal value
+result = minimax(0, 0, True, values, depth)
+
+print("Optimal value:", result)
